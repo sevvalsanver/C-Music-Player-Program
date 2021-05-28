@@ -2,17 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Oncelikle tum methodlarda kullanmak icin ortak bir Song adli struct yapisi olusturdum.Bu structta sarki adini 50 karakterlik bir
-// char dizisi olarak tanimladim ve sarki struct i icin next ve prev degerleri belirledim. Belirledigim bu next ve prev pointerlari ile
-// node lar arasinda ileriye ve geriye gecis yapabilmeyi sagladim. Node lari birbirine baglarken kullanmak icin Playlist adinda bir
-// struct olusturdum ve burada doubly linked list icin head ve tail pointerlari tanimladim. Doubly linked list yapisini kullanarak
-// nodelari birbirine bagladim.Linked listlerde uzunluk dinamik oldugu icin ve doubly linked listlerde hem ileriye hem de geriye
-// gidebilme imkani oldugu icin Doubly linked list kullanmayi tercih ettim ve istenen komutlari doubly linked list araciligiyla yerine
-// getirdim. Playlist icin linked list olustururken malloc(sizeof()) komutunu kullanarak hafizada node lar icin yer actim. Input
-// dosyasından komutları okurken fscanf ve param degiskeninden yararlandım. Dosyaya yazdirma isleminde de fprintf komutunu kullandım.
-// Ayrica dosyaya yazdirilacak olan ifadeleri AddLog adinda bir method icinde tuttum ve global degisken olarak 0 degerinden baslattigim
-// logCount degerini her seferinde bir arttirarak ciktilarin dosyaya sira ile yazilmasini sagladim.
-
 char logs[1024][1024];
 int logCount = 0;
 
@@ -45,8 +34,8 @@ struct Playlist* createPlaylist() {
     return l;
 }
 void InsertSong(struct Playlist* plist, char type, char* songName) {
-    // type : H = calma listesinin basina ekle
-    // type : T = calma listesinin sonuna ekle
+    // type : H = add initial to list
+    // type : T = add end to list
 
     struct Song* song = (struct Song*)malloc(sizeof(struct Song));
     strcpy(song->name, songName);
@@ -92,7 +81,7 @@ void MoveSong(struct Playlist* plist, char type, char* moveSongName, char* refSo
     struct Song* song = plist->head;
     while (song != NULL) {
 
-        if (strcmp(song->name, moveSongName) == 0)//girilen sarki listede varsa
+        if (strcmp(song->name, moveSongName) == 0)//the song is in list
         {
 
             if (plist->head == song) {
